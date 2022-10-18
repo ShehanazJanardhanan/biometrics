@@ -19,7 +19,7 @@ pipeline {
 	   
 	   stage('Build') {
 		steps {
-			withDockerRegistry([credentialsId:"biometrics2022",url:'']) {
+			withDockerRegistry([credentialsId:"biometrics2022",url:""]) {
 				script {
 					app = docker.build("asg")
 				}
@@ -30,7 +30,7 @@ pipeline {
 	   stage('Push') {
 		steps {
 			script {
-				docker.withRegistry('AWS ECR URL', 'ecr:us-west-2:aws-credentials') {
+				docker.withRegistry('https://644241274889.dkr.ecr.us-west-2.amazonaws.com/', 'ecr:us-west-2:aws-credentials') {
 					app.push("latest")
 				}
 			 }
