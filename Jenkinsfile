@@ -16,5 +16,25 @@ pipeline {
 			    }
 			}
 	      } 
+	   
+	   stage('Build') {
+		steps {
+			withDockerRegistry([credentialsId:"biometrics2022",url:'']) {
+				script {
+					app = docker.build("asg")
+				}
+			}
+
+		}
+	   }
+	   stage('Push') {
+		steps {
+			script {
+				docker.withRegistry('AWS ECR URL', 'ecr:us-west-2:aws-credentials') {
+					app.push("latest")
+				}
+			 }
+		 }
+	  }
    }   
 }
