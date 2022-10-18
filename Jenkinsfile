@@ -11,7 +11,7 @@ pipeline {
       } 
      stage('RunSCAAnalysisUsingSnyk') {
             steps {	
-		sh 'mvn snyk:test -fn'
+		sh 'mvn snyk:test'
 		}
       } 
   }
