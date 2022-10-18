@@ -10,8 +10,9 @@ pipeline {
 			}
       } 
      stage('RunSCAAnalysisUsingSnyk') {
-            steps {	
-		sh 'mvn snyk:test'
+            steps {
+		withCredentials([String(credentialsId:'SNYK_TOKEN',variable:'SNYK_TOKEN')])
+		sh 'mvn snyk:test -fn'
 		}
       } 
   }
